@@ -1,0 +1,11 @@
+2026-06-01;Koeln;Rom;Direktflug;199.99
+2026-06-05;Rom;Duesseldorf;Direktflug;219.99
+2026-06-23;Berlin;Paris;1 Zwischenstopp;149.50
+2026-06-20;Paris;Berlin;Direktflug;219.99
+2026-07-05;Hamburg;Madrid;Direktflug;229.50
+2026-07-13;Madrid;Koeln;Direktflug;200.00
+2026-07-19;Hamburg;Berlin;Direktflug;120.00
+2026-07-28;Athen;Duesseldorf;1 Zwischenstopp;199.99
+2026-08-01;Berlin;Athen;Direktflug;219.50
+2026-08-09;Lissabon;Koeln;Direktflug;155.99
+2026-08-21;Duesseldorf;Lissabon;1 Zwischenstopp;205.50
