@@ -1,29 +1,30 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Reise;
 import persistence.ReiseRepository;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class ReiseService {
 
-    private List<Reise> alleReisen;
+    private List<Reise> reisen;
 
+    // Konstruktor lädt automatisch alle Reisen
     public ReiseService() {
-        ReiseRepository repo = new ReiseRepository();
-        alleReisen = repo.ladeReisen();
+        ReiseRepository repository = new ReiseRepository();
+        this.reisen = repository.ladeReisen();
     }
 
     public List<Reise> getAlleReisen() {
-        return alleReisen;
+        return reisen;
     }
 
+    // Filter nach Startort
     public List<Reise> filterNachStartort(String startort) {
 
         List<Reise> ergebnis = new ArrayList<>();
 
-        for (Reise r : alleReisen) {
+        for (Reise r : reisen) {
             if (r.getStartort().equalsIgnoreCase(startort)) {
                 ergebnis.add(r);
             }
@@ -32,25 +33,13 @@ public class ReiseService {
         return ergebnis;
     }
 
-    public List<Reise> filterNachZielort(String zielort) {
+    // Filter nach Maximalpreis mit BigDecimal
+    public List<Reise> filterNachMaxPreis(BigDecimal maxPreis) {
 
         List<Reise> ergebnis = new ArrayList<>();
 
-        for (Reise r : alleReisen) {
-            if (r.getZielort().equalsIgnoreCase(zielort)) {
-                ergebnis.add(r);
-            }
-        }
-
-        return ergebnis;
-    }
-
-    public List<Reise> filterNachMaxPreis(double maxPreis) {
-
-        List<Reise> ergebnis = new ArrayList<>();
-
-        for (Reise r : alleReisen) {
-            if (r.getPreis() <= maxPreis) {
+        for (Reise r : reisen) {
+            if (r.getPreis().compareTo(maxPreis) <= 0) {
                 ergebnis.add(r);
             }
         }

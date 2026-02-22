@@ -1,12 +1,12 @@
 package service;
 
-import java.util.List;
-
-import model.Rechnung;
 import model.Reise;
+import model.Rechnung;
+import java.util.List;
 
 public class BuchungsService {
 
+    // Erstellt eine Rechnung aus Warenkorb
     public Rechnung buche(List<Reise> reisen) {
         return new Rechnung(reisen);
     }

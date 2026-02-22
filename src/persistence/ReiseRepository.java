@@ -1,22 +1,21 @@
 package persistence;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Reise;
+import java.io.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.*;
 
 public class ReiseRepository {
+
+    private static final String DATEINAME = "reisen.txt";
 
     public List<Reise> ladeReisen() {
 
         List<Reise> reisen = new ArrayList<>();
 
-        try {
-            BufferedReader reader = new BufferedReader(
-            		//new FileReader("X:\\Eclipse\\workspace\\OnlineReisebuero\\reisen.txt"));
-            		new FileReader("OnlineReisebuero/reisen.txt"));
+        // try-with-resources → Datei wird automatisch geschlossen
+        try (BufferedReader reader = new BufferedReader(new FileReader(DATEINAME))) {
 
             String zeile;
 
@@ -24,20 +23,17 @@ public class ReiseRepository {
 
                 String[] teile = zeile.split(";");
 
-                Reise r = new Reise(
-                        teile[0],
-                        teile[1],
-                        teile[2],
-                        teile[3],
-                        Double.parseDouble(teile[4])
-                );
+                LocalDate datum = LocalDate.parse(teile[0]);
+                String startort = teile[1];
+                String zielort = teile[2];
+                String flugstrecke = teile[3];
+                BigDecimal preis = new BigDecimal(teile[4]);
 
-                reisen.add(r);
+                Reise reise = new Reise(datum, startort, zielort, flugstrecke, preis);
+                reisen.add(reise);
             }
 
-            reader.close();
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Fehler beim Laden der Reisen!");
         }
 

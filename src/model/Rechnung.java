@@ -1,5 +1,7 @@
 package model;
 
+import model.Reise;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Rechnung {
@@ -10,26 +12,26 @@ public class Rechnung {
         this.reisen = reisen;
     }
 
-    public double berechneGesamtpreis() {
+    // Berechnet Gesamtpreis mit BigDecimal
+    public BigDecimal berechneGesamtpreis() {
 
-        double summe = 0;
+        BigDecimal summe = BigDecimal.ZERO;
 
         for (Reise r : reisen) {
-            summe += r.getPreis();
+            summe = summe.add(r.getPreis());
         }
 
         return summe;
     }
 
-    public void druckeRechnung() {
+    public void drucken() {
 
-        System.out.println("---- RECHNUNG ----");
+        System.out.println("----- RECHNUNG -----");
 
         for (Reise r : reisen) {
             System.out.println(r);
         }
 
-        System.out.println("-----------------");
         System.out.println("Gesamtpreis: " + berechneGesamtpreis() + " EUR");
     }
 }

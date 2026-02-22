@@ -1,15 +1,21 @@
 package model;
 
+//Zusätzliches Importieren von LocalDate & BigDecimal, anstatt String für weniger Fehlerquellen
+import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Reise {
 
-    private String datum;
+    private LocalDate datum;
     private String startort;
     private String zielort;
     private String flugstrecke;
-    private double preis;
+    private BigDecimal preis;
 
-    public Reise(String datum, String startort, String zielort,
-                 String flugstrecke, double preis) {
+    //Konstruktor
+    public Reise(LocalDate datum, String startort, String zielort,
+                 String flugstrecke, BigDecimal preis) {
         this.datum = datum;
         this.startort = startort;
         this.zielort = zielort;
@@ -17,7 +23,7 @@ public class Reise {
         this.preis = preis;
     }
 
-    public String getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
@@ -33,13 +39,15 @@ public class Reise {
         return flugstrecke;
     }
 
-    public double getPreis() {
+    public BigDecimal getPreis() {
         return preis;
     }
 
     @Override
     public String toString() {
+    	// Formatierte Ausgabe mit 2 Nachkommastellen
         return datum + " | " + startort + " -> " + zielort +
-               " | " + flugstrecke + " | " + preis + " EUR";
+               " | " + flugstrecke + " | " +
+               preis.setScale(2, RoundingMode.HALF_UP) + " EUR";
     }
 }
